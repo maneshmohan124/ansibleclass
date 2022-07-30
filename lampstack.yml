@@ -1,0 +1,26 @@
+---
+- hosts: webserver
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: installing apache,,php
+      yum:
+        name:
+          - httpd
+          - php
+          - php-mysql
+        state: installed 
+
+    - name: enabling and starting the service httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+        
+    - name: copying the php file
+      copy:
+        src: /home/ansible/index.php
+        dest: /var/www/html/index.php
+        force: yes      

@@ -1,0 +1,39 @@
+---
+- name: Myplaybook
+  hosts: webserver
+  remote_user: root
+    
+  tasks:
+    - name: make sure apache is at the latest version
+      yum:
+        name: httpd
+        state: latest
+    - name: ensure apache is running
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+
+    - name: Install Mysql DB
+      yum:
+        name: 
+          - maraidb-server
+          - mariadb   
+        state: installed
+
+    - name: Start the mysql service
+      service:
+        name: mysqld
+        enabled: yes
+        state: started
+
+    - name: Installing PHP 
+      yum:
+        name:
+          - php*
+        state: latest
+          
+    - name: Copying the php file in the /var/www/html
+      copy:
+        src: /home/ansible/index.php
+        dest: /var/www/html/index.php

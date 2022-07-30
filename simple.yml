@@ -1,0 +1,16 @@
+---
+- name: myplaybook
+  hosts: webserver
+  become: true
+  become_user: root
+    
+  tasks:
+    - name: make sure apache is at the latest version
+       yum:
+        name: httpd
+        state: latest
+
+    - name: ensure apache is running
+      service:
+        name: httpd
+        state: started
