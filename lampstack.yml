@@ -10,7 +10,7 @@
         name:
           - httpd
           - php
-          - php-mysql
+          - php-mysqli
         state: installed 
 
     - name: enabling and starting the service httpd
@@ -21,6 +21,6 @@
         
     - name: copying the php file
       copy:
-        src: /home/ansible/index.php
+        src: /home/ansibleclass/ansibleclass/index.php
         dest: /var/www/html/index.php
         force: yes      

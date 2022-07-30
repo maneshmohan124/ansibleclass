@@ -1,17 +1,17 @@
 ---
 - name: Install MySQL
   hosts: webserver
-  become: true
-  remote_user: root
+  become: yes
+  remote_user: ec2-user
   become_method: sudo
   gather_facts: true
   
   tasks:
     - name: "Installing Repo"
-      shell: sudo rpm -Uvh http://repo.mysql.com/get/mysql-community-release-el7-7.noarch.rpm
+      shell: sudo rpm -Uvh https://repo.mysql.com/mysql57-community-release-sles12-7.noarch.rpm
       ignore_errors: yes
     - name: "Installing MySQL 5.7"
-      package: name=mysql-community-server state=present
+      package: name=mysql-community-server* state=present
     - name: Start the MySQL service
       become: true
       service:
